@@ -35,17 +35,27 @@
     $con = new mysqli($servername, $username, $password, $dbname);
 
 
-    $sqlPiket = "SELECT * FROM `JADWAL` LIMIT 1";
-    $res= $con->query($sqlPiket);
+    $sqlPiket = "SELECT * FROM JADWAL ORDER BY Tanggal LIMIT 1";
+    $sqlcadang = "SELECT * FROM JADWAL ORDER BY Tanggal LIMIT 1,1";
+    $sqlLepas = "SELECT * FROM JADWAL ORDER BY Tanggal LIMIT 2,1";
 
+    $res= $con->query($sqlPiket);
+    $res2=$con->query($sqlcadang);
+    $res3=$con->query($sqlLepas);
 
     while($row = $res->fetch_assoc()){
+      echo"
+      <p>Piket hadir: ".$row["GroupPiket"]." </p>";
+    };
 
-    echo"
-    <p>Piket hadir:".$row["GroupPiket"]." </p>
-    <p>Cadangan Piket: ".$row["GroupPiket"]." </p>
-    <p>Lepas Piket: ".$row["GroupPiket"]." </p>";
+    while($row = $res2->fetch_assoc()){
+     echo"
+      <p>Cadangan Piket: ".$row["GroupPiket"]." </p>";
+    };
 
+    while($row = $res3->fetch_assoc()){
+      echo
+      "<p>Lepas Piket: ".$row["GroupPiket"]." </p>";
     };
     ?>
 
@@ -120,10 +130,42 @@
 
 <div id="id01" class= "modal" class="container" style="display: none; background-color: #f1f1f1;" >  
     
-    <h3>GroupPiket</h3>    
-    <p>Piket hadir: A </p>
-    <p>Cadangan Piket: B </p>
-    <p>Lepas Piket: C </p>
+  <h3> -Group Piket- </h3>
+
+    <?php
+
+      $servername = "localhost";
+      $username = "root";
+      $password = "";
+      $dbname = "sistemAbsen";
+
+      //Create Connection
+      $con = new mysqli($servername, $username, $password, $dbname);
+
+
+      $sqlPiket = "SELECT * FROM JADWAL ORDER BY Tanggal LIMIT 1";
+      $sqlcadang = "SELECT * FROM JADWAL ORDER BY Tanggal LIMIT 1,1";
+      $sqlLepas = "SELECT * FROM JADWAL ORDER BY Tanggal LIMIT 2,1";
+
+      $res= $con->query($sqlPiket);
+      $res2=$con->query($sqlcadang);
+      $res3=$con->query($sqlLepas);
+
+      while($row = $res->fetch_assoc()){
+        echo"
+      <p>Piket hadir: ".$row["GroupPiket"]." </p>";
+      };
+
+      while($row = $res2->fetch_assoc()){
+        echo"
+      <p>Cadangan Piket: ".$row["GroupPiket"]." </p>";
+      };
+
+      while($row = $res3->fetch_assoc()){
+      echo
+      "<p>Lepas Piket: ".$row["GroupPiket"]." </p>";
+      };
+    ?>
     <p> <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Data Absen Hari Ini Telah di SUBMIT !!!</button>
     
 </div>
