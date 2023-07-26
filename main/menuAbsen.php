@@ -23,9 +23,34 @@
 
 <div>
     <h3> -Group Piket- </h3>
-    <p>Piket Hadir: A </p>
-    <p>Cadangan Piket: B</p>
-    <p>Lepas Piket: C</p>
+
+    <?php
+    
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "sistemAbsen";
+
+    //Create Connection
+    $con = new mysqli($servername, $username, $password, $dbname);
+
+
+    $sqlPiket = "SELECT * FROM `JADWAL` LIMIT 1";
+    $res= $con->query($sqlPiket);
+
+
+    while($row = $res->fetch_assoc()){
+
+    echo"
+    <p>Piket hadir:".$row["GroupPiket"]." </p>
+    <p>Cadangan Piket: ".$row["GroupPiket"]." </p>
+    <p>Lepas Piket: ".$row["GroupPiket"]." </p>";
+
+    };
+    ?>
+
+
+    
 </div>
 
 <div>
@@ -95,7 +120,7 @@
 
 <div id="id01" class= "modal" class="container" style="display: none; background-color: #f1f1f1;" >  
     
-    <h3>GroupPiket</h3>
+    <h3>GroupPiket</h3>    
     <p>Piket hadir: A </p>
     <p>Cadangan Piket: B </p>
     <p>Lepas Piket: C </p>
